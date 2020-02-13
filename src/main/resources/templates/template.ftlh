@@ -47,7 +47,8 @@
         hope you are doing well this ${treatment.time} and enjoying the ${treatment.weather} weather<br>
         in ${treatment.city} ${treatment.country}!<br>
         Happy ${treatment.holiday} in ${treatment.holidayDays} days!<br>
-        We have a very special treatment for you: double you coins ${treatment.coins} only for 9.99$
+        We have a very special treatment to double you coins ${treatment.coins} only
+        for ${treatment.price} ${treatment.currency}
     </p>
 </div>
 <div class="div_right">

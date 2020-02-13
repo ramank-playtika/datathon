@@ -38,8 +38,9 @@ public class InfoRepository {
             .eventName(rs.getString("event_name"))
             .eventDays(rs.getString("event_days"))
             .temperature(rs.getString("feels_like"))
+            .userId(userId)
             .date(date)
             .weather(rs.getString("main")).build());
-    return result.isEmpty() ? InfoDto.builder().date(date).build() : result.get(0);
+    return result.isEmpty() ? InfoDto.builder().userId(userId).date(date).build() : result.get(0);
   }
 }

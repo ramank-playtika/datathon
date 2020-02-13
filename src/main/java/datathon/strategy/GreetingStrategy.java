@@ -16,9 +16,19 @@ public class GreetingStrategy implements Strategy {
     put("United States", "Hello!");
   }};
 
+  private Map<String, String> currency = new HashMap() {{
+    put("Belarus", "BYN");
+    put("Israel", "ILS");
+    put("Ukraine", "UAH");
+    put("United States", "USD");
+  }};
+
   @Override
   public void fill(InfoDto infoDto, TreatmentDto treatmentDto) {
     treatmentDto.setGreeting(dictionary.getOrDefault(infoDto.getCountryName(), "Hello!"));
+    treatmentDto.setCurrency(currency.getOrDefault(infoDto.getCountryName(), "$"));
+    int price = String.valueOf(infoDto.getBalanceCoins()).length();
+    treatmentDto.setPrice(price + ".99");
     if (infoDto.getFirstName() != null) {
       treatmentDto.setFirstName(infoDto.getFirstName());
     }

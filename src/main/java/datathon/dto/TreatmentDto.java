@@ -9,6 +9,8 @@ public class TreatmentDto {
   private String firstName = "X";
   private String lastName = "X";
   private String coins = "X";
+  private String currency = "X";
+  private String price = "X";
 
   private String country = "X";
   private String city = "X";
