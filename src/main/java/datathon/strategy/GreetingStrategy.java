@@ -25,18 +25,20 @@ public class GreetingStrategy implements Strategy {
 
   @Override
   public void fill(InfoDto infoDto, TreatmentDto treatmentDto) {
-    treatmentDto.setGreeting(dictionary.getOrDefault(infoDto.getCountryName(), "Hello!"));
-    treatmentDto.setCurrency(currency.getOrDefault(infoDto.getCountryName(), "$"));
-    int price = String.valueOf(infoDto.getBalanceCoins()).length();
-    treatmentDto.setPrice(price + ".99");
-    if (infoDto.getFirstName() != null) {
-      treatmentDto.setFirstName(infoDto.getFirstName());
-    }
-    if (infoDto.getLastName() != null) {
-      treatmentDto.setLastName(infoDto.getLastName());
-    }
-    if (infoDto.getBalanceCoins() != null) {
-      treatmentDto.setCoins(infoDto.getBalanceCoins());
+    if (infoDto.getUserId() != null) {
+      treatmentDto.setGreeting(dictionary.getOrDefault(infoDto.getCountryName(), "Hello!"));
+      treatmentDto.setCurrency(currency.getOrDefault(infoDto.getCountryName(), "$"));
+      int price = infoDto.getBalanceCoins().indexOf(".");
+      treatmentDto.setPrice(price + ".99");
+      if (infoDto.getFirstName() != null) {
+        treatmentDto.setFirstName(infoDto.getFirstName());
+      }
+      if (infoDto.getLastName() != null) {
+        treatmentDto.setLastName(infoDto.getLastName());
+      }
+      if (infoDto.getBalanceCoins() != null) {
+        treatmentDto.setCoins(infoDto.getBalanceCoins());
+      }
     }
   }
 }

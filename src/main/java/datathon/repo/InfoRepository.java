@@ -41,6 +41,6 @@ public class InfoRepository {
             .userId(userId)
             .date(date)
             .weather(rs.getString("main")).build());
-    return result.isEmpty() ? InfoDto.builder().userId(userId).date(date).build() : result.get(0);
+    return result.isEmpty() ? InfoDto.builder().date(date).build() : result.get(0);
   }
 }
