@@ -20,7 +20,7 @@ public class HolidayStrategy implements Strategy {
     if (eventName != null) {
       treatmentDto.setHoliday(eventName);
       Arrays.stream(resources)
-          .filter(r -> FilenameUtils.removeExtension(r.getFilename()).equalsIgnoreCase(eventName)).findFirst()
+          .filter(r -> FilenameUtils.removeExtension(r.getFilename()).equalsIgnoreCase(eventName.replace("'", "_"))).findFirst()
           .ifPresent(resource -> treatmentDto.setHolidayImg("images/holiday/" + resource.getFilename()));
     }
   }

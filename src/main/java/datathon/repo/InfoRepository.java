@@ -13,7 +13,7 @@ public class InfoRepository {
         "select u.user_id, u.user_first_name, u.user_last_name, u.city_name, u.country_name, h.event_name, c.main, c.feels_like " +
         "from user_profile u\n" +
             "left join holidays h on u.country_name=h.location\n" +
-            "left join cities_weather c on u.city_name=c.city\n" +
+            "left join cities_weather_final c on u.city_name=c.city\n" +
             "where u.user_id=? and h.start_date>CURRENT_DATE\n" +
             "order by h.start_date\n" +
             "limit 1";
