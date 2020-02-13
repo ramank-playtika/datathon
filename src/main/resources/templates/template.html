@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hakathon</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{main.css}"/>
+</head>
+<body>
+
+<div align="center">
+    <p>Greeting: Здравстуйте</p>
+</div>
+<div class="div_right">
+    <p>Weather: <span th:text="${weather}"/></p>
+    <img src="../static/images/time/evening.jpg" width=300" height="300"/>
+</div>
+<div class="div_right">
+    <p>Time:  Evening</p>
+<!--    <img th:src="@{${time_path}}" width=300" height="300"/>-->
+</div>
+<div class="div_right">
+    <p>Holiday: Easter</p>
+<!--    <img th:src="${holiday_path}" width=300" height="300"/>-->
+</div>
+<div class="div_right">
+    <p>Location: Minsk</p>
+<!--    <img th:src="${location_path}" width=300" height="300"/>-->
+</div>
+</body>
+</html>
