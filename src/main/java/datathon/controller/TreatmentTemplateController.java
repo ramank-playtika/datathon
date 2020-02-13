@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -42,7 +43,14 @@ public class TreatmentTemplateController {
 
   @RequestMapping(value = "/treatment", method = RequestMethod.POST)
   public String treatment(UserDateDto userDateDto, Model model) {
-    InfoDto info = infoRepository.getInfo(userDateDto.getUserId(), userDateDto.getDate());
+    LocalDateTime date;
+    try {
+      date = LocalDateTime.parse(userDateDto.getDate());
+    } catch (Exception e) {
+      date = LocalDateTime.now();
+    }
+
+    InfoDto info = infoRepository.getInfo(userDateDto.getUserId(), date);
     TreatmentDto treatmentDto = new TreatmentDto();
     Set<Strategy> strategies = Stream.of(weatherStrategy, holidayStrategy, greetingStrategy, timeStrategy, locationStrategy)
         .collect(Collectors.toSet());

@@ -3,6 +3,8 @@ package datathon.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 public class InfoDto {
@@ -15,5 +17,5 @@ public class InfoDto {
   private String eventDays;
   private String weather;
   private String temperature;
-  private Long timeInMs;
+  private LocalDateTime date;
 }
