@@ -15,7 +15,7 @@ public class TreatmentRestController {
 
     @RequestMapping("/data/{userId}")
     public InfoDto index(@PathVariable String userId) {
-        InfoDto info = infoRepository.getInfo(userId);
+        InfoDto info = infoRepository.getInfo(userId, "");
         info.setTimeInMs(System.currentTimeMillis());
         return info;
     }

@@ -42,11 +42,11 @@ public class TreatmentTemplateController {
 
   @RequestMapping(value = "/treatment", method = RequestMethod.POST)
   public String treatment(UserDateDto userDateDto, Model model) {
-    InfoDto info = infoRepository.getInfo(userDateDto.getUserId());
+    InfoDto info = infoRepository.getInfo(userDateDto.getUserId(), userDateDto.getDate());
     TreatmentDto treatmentDto = new TreatmentDto();
     Set<Strategy> strategies = Stream.of(weatherStrategy, holidayStrategy, greetingStrategy, timeStrategy, locationStrategy)
         .collect(Collectors.toSet());
-    strategies.stream().forEach(s -> s.fill(info, treatmentDto));
+    strategies.forEach(s -> s.fill(info, treatmentDto));
     model.addAttribute("treatment", treatmentDto);
     model.addAttribute("ud", userDateDto);
     return "template";

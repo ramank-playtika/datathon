@@ -4,7 +4,6 @@
     <title>Hakathon</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="main.css"/>
     <style>
         .div_right {
             height: 50%;
@@ -40,11 +39,15 @@
     Date:<br>
     <input type="text" value="${ud.date}" name="date">
     <br><br>
-    <input type="submit" value="Prepare Treatment">
+    <input type="submit" value="Generate Treatment">
 </form>
 
 <div align="center">
-    <p>Greeting: ${treatment.greeting}</p>
+    <p>${treatment.greeting} Dear ${treatment.firstName} ${treatment.lastName}<br>
+        hope you are doing well this ${treatment.time} and enjoying the ${treatment.weather} weather<br>
+        in ${treatment.city} ${treatment.country}!<br>
+        Happy ${treatment.holiday} in ${treatment.holidayDays} days!
+    </p>
 </div>
 <div class="div_right">
     <p>Weather: ${treatment.weather}</p>
@@ -59,7 +62,7 @@
     <img src="${treatment.holidayImg}" width=400" height="300"/>
 </div>
 <div class="div_right">
-    <p>Location: ${treatment.country} ${treatment.city}</p>
+    <p>Location: ${treatment.city} ${treatment.country}</p>
     <img src="${treatment.locationImg}" width=400" height="300"/>
 </div>
 </body>

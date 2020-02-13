@@ -5,31 +5,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 public class InfoRepository {
-    private static String QUERY =
-        "select u.user_id, u.user_first_name, u.user_last_name, u.city_name, u.country_name, h.event_name, c.main, c.feels_like " +
-        "from user_profile u\n" +
-            "left join holidays h on u.country_name=h.location\n" +
-            "left join cities_weather_final c on u.city_name=c.city\n" +
-            "where u.user_id=? and h.start_date>CURRENT_DATE\n" +
-            "order by h.start_date\n" +
-            "limit 1";
+  private static String QUERY =
+      "select u.user_id, u.user_first_name, u.user_last_name, u.city_name, u.country_name, h.event_name, c.main, c.feels_like, datediff(h.start_date, ?) as event_days " +
+          "from user_profile u\n" +
+          "left join holidays h on u.country_name=h.location\n" +
+          "left join cities_weather_final c on u.city_name=c.city\n" +
+          "where u.user_id=?\n" +
+          "having event_days >= 0\n" +
+          "order by abs(event_days)\n" +
+          "limit 1";
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+  @Autowired
+  JdbcTemplate jdbcTemplate;
 
-    public InfoDto getInfo(String userId) {
-        List<InfoDto> result = jdbcTemplate.query(
-                QUERY, new Object[]{userId},
-                (rs, rowNum) -> InfoDto.builder().userId(rs.getString("user_id"))
-                        .cityName(rs.getString("city_name"))
-                        .countryName(rs.getString("country_name"))
-                        .eventName(rs.getString("event_name"))
-                        .temperature(rs.getString("feels_like"))
-                        .weather(rs.getString("main")).build());
-        return result.isEmpty() ? InfoDto.builder().build() : result.get(0);
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+  public InfoDto getInfo(String userId, String date) {
+    try {
+      LocalDate ld = LocalDate.parse(date);
+      date = ld.format(formatter);
+    } catch (Exception e) {
+      date = LocalDate.now().format(formatter);
     }
+
+    List<InfoDto> result = jdbcTemplate.query(
+        QUERY, new Object[]{date, userId},
+        (rs, rowNum) -> InfoDto.builder().userId(rs.getString("user_id"))
+            .firstName(rs.getString("user_first_name"))
+            .lastName(rs.getString("user_last_name"))
+            .cityName(rs.getString("city_name"))
+            .countryName(rs.getString("country_name"))
+            .eventName(rs.getString("event_name"))
+            .eventDays(rs.getString("event_days"))
+            .temperature(rs.getString("feels_like"))
+            .weather(rs.getString("main")).build());
+    return result.isEmpty() ? InfoDto.builder().build() : result.get(0);
+  }
 }

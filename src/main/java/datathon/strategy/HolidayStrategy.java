@@ -19,6 +19,7 @@ public class HolidayStrategy implements Strategy {
     String eventName = infoDto.getEventName();
     if (eventName != null) {
       treatmentDto.setHoliday(eventName);
+      treatmentDto.setHolidayDays(infoDto.getEventDays());
       Arrays.stream(resources)
           .filter(r -> FilenameUtils.removeExtension(r.getFilename()).equalsIgnoreCase(eventName.replace("'", "_"))).findFirst()
           .ifPresent(resource -> treatmentDto.setHolidayImg("images/holiday/" + resource.getFilename()));
