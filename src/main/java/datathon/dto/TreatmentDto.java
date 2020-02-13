@@ -6,11 +6,12 @@ import lombok.Data;
 public class TreatmentDto {
   private String greeting = "X";
 
-  private String firstName = "";
-  private String lastName = "";
+  private String firstName = "X";
+  private String lastName = "X";
+  private String coins = "X";
 
   private String country = "X";
-  private String city = "";
+  private String city = "X";
   private String locationImg = "/images/default.png";
 
   private String weather = "X";

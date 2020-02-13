@@ -25,5 +25,8 @@ public class GreetingStrategy implements Strategy {
     if (infoDto.getLastName() != null) {
       treatmentDto.setLastName(infoDto.getLastName());
     }
+    if (infoDto.getBalanceCoins() != null) {
+      treatmentDto.setCoins(infoDto.getBalanceCoins());
+    }
   }
 }

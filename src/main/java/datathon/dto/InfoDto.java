@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class InfoDto {
   private String userId;
+  private String balanceCoins;
   private String firstName;
   private String lastName;
   private String cityName;
