@@ -4,17 +4,18 @@ import lombok.Data;
 
 @Data
 public class TreatmentDto {
-    private String greeting;
+  private String greeting = "Unknown";
 
-    private String location;
-    private String locationImg;
+  private String country = "Unknown";
+  private String city = "";
+  private String locationImg = "/images/default.png";
 
-    private String weather;
-    private String weatherImg;
+  private String weather = "Unknown";
+  private String weatherImg = "/images/default.png";
 
-    private String holiday;
-    private String holidayImg;
+  private String holiday = "Unknown";
+  private String holidayImg = "/images/default.png";
 
-    private String time;
-    private String timeImg;
+  private String time = "Unknown";
+  private String timeImg = "/images/default.png";
 }
